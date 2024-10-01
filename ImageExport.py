@@ -1,7 +1,9 @@
 import base64
 import io
 import os
+import torch
 from PIL import Image
+import numpy as np
 
 class ImageExport:
     @classmethod
@@ -16,12 +18,14 @@ class ImageExport:
 
     RETURN_TYPES = ()
     FUNCTION = "encode_image"
-    CATEGORY = "Liberated Nodes/Image"
+    CATEGORY = "Upscale Nodes/utility"
 
-    def encode_image(self, image: Image, output_directory: str, filename: str):
+    def encode_image(self, image: torch.Tensor, output_directory: str, filename: str):
+        pil_image = self.tensor_to_pil(image)
+
         # Convert image to bytes
         buffered = io.BytesIO()
-        image.save(buffered, format=image.format)
+        pil_image.save(buffered, format=pil_image.format)
         image_bytes = buffered.getvalue()
 
         # Encode bytes to base64
@@ -47,3 +51,13 @@ class ImageExport:
     @classmethod
     def IS_CHANGED(cls, image, output_directory, filename):
         return float("NaN")
+
+    def tensor_to_pil(self, img_tensor, batch_index=0):
+        # Takes an image in a batch in the form of a tensor of shape [batch_size, channels, height, width]
+        # and returns an PIL Image with the corresponding mode deduced by the number of channels
+
+        # Take the image in the batch given by batch_index
+        img_tensor = img_tensor[batch_index].unsqueeze(0)
+        i = 255. * img_tensor.cpu().numpy()
+        img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8).squeeze())
+        return img
