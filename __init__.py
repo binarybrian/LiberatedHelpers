@@ -8,6 +8,6 @@ NODE_CLASS_MAPPINGS = {
 
 NODE_DISPLAY_NAME_MAPPINGS = {
     "UpscaleSlicer": "Upscale Slicer",
-    "ImageExport":"Image Export"
+    "ImageExport": "Image Export"
 }
 __all__ = ['NODE_CLASS_MAPPINGS', 'NODE_DISPLAY_NAME_MAPPINGS']
