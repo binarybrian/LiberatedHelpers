@@ -9,17 +9,16 @@ class ImageExport:
         return {
             "required": {
                 "image": ("IMAGE",),
-                "output_directory": ("STRING", {"default": os.environ.get("COMFYUI_OUTPUT_PATH")}),
-                "filename": ("STRING", {"default": "encoded_image.txt"})
+                "output_directory": ("STRING", {"default": ""}),
+                "filename": ("STRING", {"default": "encoded_image.txt"}),
             }
         }
 
     RETURN_TYPES = ()
-    RETURN_NAMES = ("encoded_image",)
     FUNCTION = "encode_image"
     CATEGORY = "Liberated Nodes/Image"
 
-    def encode_image(self, image: Image.Image, output_directory: str, filename: str):
+    def encode_image(self, image: Image, output_directory: str, filename: str):
         # Convert image to bytes
         buffered = io.BytesIO()
         image.save(buffered, format=image.format)
