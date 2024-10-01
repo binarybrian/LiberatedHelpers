@@ -26,7 +26,7 @@ class ImageExport:
         image_bytes = buffered.getvalue()
 
         # Encode bytes to base64
-        image_base64: str = base64.b64encode(image_bytes).decode('utf-8')
+        image_base64 = base64.b64encode(image_bytes).decode('utf-8')
 
         os.makedirs(output_directory, exist_ok=True)
         filepath = os.path.join(output_directory, filename)
