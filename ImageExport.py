@@ -29,7 +29,7 @@ class ImageExport:
 
         # Convert image to bytes
         buffered = io.BytesIO()
-        pil_image.save(buffered, format=pil_image.format)
+        pil_image.save(buffered, image_format)
         image_bytes = buffered.getvalue()
 
         # Encode bytes to base64
