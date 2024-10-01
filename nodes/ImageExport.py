@@ -1,5 +1,6 @@
 import base64
 import os
+from torch import Tensor
 #import sys
 
 #from util import pil_to_tensor, tensor_to_pil
@@ -23,8 +24,8 @@ class ImageExport:
     CATEGORY = "Upscale Nodes/utility"
     OUTPUT_NODE = True
 
-    def process_image(self, image, output_directory, filename):
-        print(f"The type of the argument 'tensor' is: {type(image)}")
+    def process_image(self, image: Tensor, output_directory, filename):
+        print(f"The type of the argument 'image' is: {type(image)}")
 
         pil_image = tensor_to_pil(image)
         image_bytes = pil_image.convert('RGB').tobytes()
