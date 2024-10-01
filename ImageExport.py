@@ -38,6 +38,7 @@ class ImageExport:
         if not filepath.lower().endswith('.txt'):
             filepath += '.txt'
 
+        print("The earth says HELLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         # Write base64 string to file
         try:
             with open(filepath, 'wb') as file:
