@@ -23,11 +23,11 @@ class ImageExport:
     CATEGORY = "Upscale Nodes/utility"
     OUTPUT_NODE = True
 
-    def process_image(self, tensor, output_directory, filename):
-        print(f"The type of the argument 'tensor' is: {type(tensor)}")
+    def process_image(self, image, output_directory, filename):
+        print(f"The type of the argument 'tensor' is: {type(image)}")
 
-        image = tensor_to_pil(tensor)
-        image_bytes = image.convert('RGB').tobytes()
+        pil_image = tensor_to_pil(image)
+        image_bytes = pil_image.convert('RGB').tobytes()
 
         image_base64 = base64.b64encode(image_bytes).decode('utf-8')
 
