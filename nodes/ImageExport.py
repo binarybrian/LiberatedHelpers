@@ -1,4 +1,5 @@
 import base64
+import io
 import os
 from torch import Tensor
 #import sys
@@ -27,11 +28,11 @@ class ImageExport:
     def process_image(self, image: Tensor, output_directory, filename):
         print(f"The type of the argument 'image' is: {type(image)}")
 
-
         pil_image = tensor_to_pil(image)
-        image_bytes = pil_image.convert('RGB').tobytes()
-
-        image_base64 = base64.b64encode(image_bytes).decode('utf-8')
+        #image_bytes = pil_image.convert('RGB').tobytes()
+        buffered = io.BytesIO
+        pil_image.save(buffered, format="PNG")
+        image_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
         os.makedirs(output_directory, exist_ok=True)
         filepath = os.path.join(output_directory, filename)
