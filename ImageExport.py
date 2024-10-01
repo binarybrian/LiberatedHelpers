@@ -16,10 +16,10 @@ class ImageExport:
             }
         }
 
-    FUNCTION = "encode_image"
+    FUNCTION = "process_image"
     CATEGORY = "Upscale Nodes/utility"
 
-    def encode_image(self, image: torch.Tensor, output_directory: str, filename: str):
+    def process_image(self, image: torch.Tensor, output_directory: str, filename: str):
         pil_image = self.tensor_to_pil(image)
 
         # Convert image to bytes
