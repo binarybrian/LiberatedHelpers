@@ -14,7 +14,7 @@ class ImageExport:
             }
         }
 
-    RETURN_TYPES = ("STRING",)
+    RETURN_TYPES = ()
     RETURN_NAMES = ("encoded_image",)
     FUNCTION = "encode_image"
     CATEGORY = "Liberated Nodes/Image"
@@ -37,10 +37,14 @@ class ImageExport:
 
         # Write base64 string to file
         try:
-            with open(filepath, "w") as file:
+            with open(filepath, 'wb') as file:
                 file.write(image_base64)
             print(f"Encoded image saved to {filepath}")
         except Exception as e:
             print(f"Error saving encoded image file: {str(e)}")
 
         return ()
+
+    @classmethod
+    def IS_CHANGED(cls, image, output_directory, filename):
+        return float("NaN")
