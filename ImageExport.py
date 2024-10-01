@@ -21,12 +21,10 @@ class ImageExport:
     CATEGORY = "Upscale Nodes/utility"
     OUTPUT_NODE = True
 
-    def process_image(self, image: torch.Tensor, output_directory: str, filename: str):
-        pil_image = self.tensor_to_pil(image)
-
+    def process_image(self, image: Image.Image, output_directory: str, filename: str):
         # Convert image to bytes
         buffered = io.BytesIO()
-        pil_image.save(buffered, format=pil_image.format)
+        image.save(buffered, format=image.format)
         image_bytes = buffered.getvalue()
 
         # Encode bytes to base64
@@ -39,10 +37,9 @@ class ImageExport:
         if not filepath.lower().endswith('.txt'):
             filepath += '.txt'
 
-        print("The earth says HELLO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
         # Write base64 string to file
         try:
-            with open(filepath, 'wb') as file:
+            with open(filepath, 'w') as file:
                 file.write(image_base64)
             print(f"Encoded image saved to {filepath}")
         except Exception as e:
