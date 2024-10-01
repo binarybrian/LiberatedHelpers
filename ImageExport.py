@@ -16,6 +16,7 @@ class ImageExport:
             }
         }
 
+    RETURN_TYPES = ()
     FUNCTION = "process_image"
     CATEGORY = "Upscale Nodes/utility"
 
