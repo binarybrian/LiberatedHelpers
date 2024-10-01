@@ -1,9 +1,5 @@
 import base64
-import io
 import os
-
-from PIL import Image
-
 
 class ImageExport:
     @classmethod
@@ -21,24 +17,17 @@ class ImageExport:
     CATEGORY = "Upscale Nodes/utility"
     OUTPUT_NODE = True
 
-    def process_image(self, image: Image, output_directory: str, filename: str):
-        # Convert image to bytes
-        buffered = io.BytesIO()
-        image_format = 'PNG'
-        image.save(buffered, format=image_format)
-        image_bytes = buffered.getvalue()
+    def process_image(self, image, output_directory, filename):
+        image_bytes = image.convert('RGB').tobytes()
 
-        # Encode bytes to base64
         image_base64 = base64.b64encode(image_bytes).decode('utf-8')
 
         os.makedirs(output_directory, exist_ok=True)
         filepath = os.path.join(output_directory, filename)
 
-        # Ensure the filename ends with .txt
         if not filepath.lower().endswith('.txt'):
             filepath += '.txt'
 
-        # Write base64 string to file
         try:
             with open(filepath, 'w') as file:
                 file.write(image_base64)
@@ -46,12 +35,20 @@ class ImageExport:
         except Exception as e:
             print(f"Error saving encoded image file: {str(e)}")
 
-    # def tensor_to_pil(self, img_tensor, batch_index=0):
-    #     # Takes an image in a batch in the form of a tensor of shape [batch_size, channels, height, width]
-    #     # and returns an PIL Image with the corresponding mode deduced by the number of channels
-    #
-    #     # Take the image in the batch given by batch_index
-    #     img_tensor = img_tensor[batch_index].unsqueeze(0)
-    #     i = 255. * img_tensor.cpu().numpy()
-    #     img = Image.fromarray(np.clip(i, 0, 255).astype(np.uint8).squeeze())
-    #     return img
+# def main():
+#     if len(sys.argv) != 2:
+#         print("Usage: python script.py <image_path>")
+#         sys.exit(1)
+#
+#     image_path = sys.argv[1]
+#
+#     try:
+#         with Image.open(image_path) as img:
+#             image_export = ImageExport()
+#             image_export.process_image(img, "/qpool/temp/", 'encoded_image.txt')
+#     except Exception as e:
+#         print(f"Error processing image: {e}")
+#         sys.exit(1)
+#
+# if __name__ == "__main__":
+#     main()
