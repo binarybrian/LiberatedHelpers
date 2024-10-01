@@ -1,5 +1,5 @@
-from .UpscaleSlicer import UpscaleSlicer
-from .ImageExport import ImageExport
+from .nodes.UpscaleSlicer import UpscaleSlicer
+from .nodes.ImageExport import ImageExport
 
 NODE_CLASS_MAPPINGS = {
     "UpscaleSlicer": UpscaleSlicer,
