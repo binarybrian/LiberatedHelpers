@@ -45,6 +45,7 @@ class ImageExport:
                 file.write(image_base64)
             print(f"Encoded image saved to {filepath}")
         except Exception as e:
+            print(f"Error saving encoded image file: {str(e)}")
 
     def tensor_to_pil(self, img_tensor, batch_index=0):
         # Takes an image in a batch in the form of a tensor of shape [batch_size, channels, height, width]
