@@ -30,7 +30,7 @@ class ImageExport:
 
         pil_image = tensor_to_pil(image)
         #image_bytes = pil_image.convert('RGB').tobytes()
-        buffered = io.BytesIO
+        buffered = io.BytesIO()
         pil_image.save(buffered, format="PNG")
         image_base64 = base64.b64encode(buffered.getvalue()).decode('utf-8')
 
