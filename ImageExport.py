@@ -24,6 +24,9 @@ class ImageExport:
     def process_image(self, image: torch.Tensor, output_directory: str, filename: str):
         pil_image = self.tensor_to_pil(image)
 
+        # Derive the format from the PIL image
+        image_format = pil_image.format if pil_image.format else 'PNG'
+
         # Convert image to bytes
         buffered = io.BytesIO()
         pil_image.save(buffered, format=pil_image.format)
