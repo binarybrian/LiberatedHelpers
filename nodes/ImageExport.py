@@ -24,6 +24,8 @@ class ImageExport:
     OUTPUT_NODE = True
 
     def process_image(self, tensor, output_directory, filename):
+        print(f"The type of the argument 'tensor' is: {type(tensor)}")
+
         image = tensor_to_pil(tensor)
         image_bytes = image.convert('RGB').tobytes()
 
