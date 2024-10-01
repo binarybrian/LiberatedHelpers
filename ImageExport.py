@@ -19,6 +19,7 @@ class ImageExport:
     RETURN_TYPES = ()
     FUNCTION = "process_image"
     CATEGORY = "Upscale Nodes/utility"
+    OUTPUT_NODE = True
 
     def process_image(self, image: torch.Tensor, output_directory: str, filename: str):
         pil_image = self.tensor_to_pil(image)
@@ -48,10 +49,6 @@ class ImageExport:
             print(f"Error saving encoded image file: {str(e)}")
 
         return ()
-
-    @classmethod
-    def IS_CHANGED(cls, image, output_directory, filename):
-        return float("NaN")
 
     def tensor_to_pil(self, img_tensor, batch_index=0):
         # Takes an image in a batch in the form of a tensor of shape [batch_size, channels, height, width]
