@@ -27,6 +27,7 @@ class ImageExport:
     def process_image(self, image: Tensor, output_directory, filename):
         print(f"The type of the argument 'image' is: {type(image)}")
 
+
         pil_image = tensor_to_pil(image)
         image_bytes = pil_image.convert('RGB').tobytes()
 
@@ -44,6 +45,8 @@ class ImageExport:
             print(f"Encoded image saved to {filepath}")
         except Exception as e:
             print(f"Error saving encoded image file: {str(e)}")
+
+        return ()
 
 
 
