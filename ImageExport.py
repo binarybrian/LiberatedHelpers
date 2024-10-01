@@ -16,7 +16,6 @@ class ImageExport:
             }
         }
 
-    RETURN_TYPES = ()
     FUNCTION = "encode_image"
     CATEGORY = "Upscale Nodes/utility"
 
