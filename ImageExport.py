@@ -5,7 +5,7 @@ import os
 #from util import pil_to_tensor, tensor_to_pil
 from util import tensor_to_pil
 
-from PIL import Image
+#from PIL import Image
 
 class ImageExport:
     @classmethod
