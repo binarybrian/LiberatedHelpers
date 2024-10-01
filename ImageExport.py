@@ -21,10 +21,12 @@ class ImageExport:
     CATEGORY = "Upscale Nodes/utility"
     OUTPUT_NODE = True
 
-    def process_image(self, image: Image.Image, output_directory: str, filename: str):
+    def process_image(self, image: torch.Tensor, output_directory: str, filename: str):
+        pil_image = self.tensor_to_pil(image)
+
         # Convert image to bytes
         buffered = io.BytesIO()
-        image.save(buffered, format=image.format)
+        pil_image.save(buffered, format=pil_image.format)
         image_bytes = buffered.getvalue()
 
         # Encode bytes to base64
@@ -33,7 +35,7 @@ class ImageExport:
         os.makedirs(output_directory, exist_ok=True)
         filepath = os.path.join(output_directory, filename)
 
-        # Ensure the filename ends with .csv
+        # Ensure the filename ends with .txt
         if not filepath.lower().endswith('.txt'):
             filepath += '.txt'
 
@@ -43,9 +45,6 @@ class ImageExport:
                 file.write(image_base64)
             print(f"Encoded image saved to {filepath}")
         except Exception as e:
-            print(f"Error saving encoded image file: {str(e)}")
-
-        return ()
 
     def tensor_to_pil(self, img_tensor, batch_index=0):
         # Takes an image in a batch in the form of a tensor of shape [batch_size, channels, height, width]
