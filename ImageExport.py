@@ -24,7 +24,7 @@ class ImageExport:
     def process_image(self, image: Image, output_directory: str, filename: str):
         # Convert image to bytes
         buffered = io.BytesIO()
-        image_format = image.format if image.format else 'PNG'
+        image_format = 'PNG'
         image.save(buffered, format=image_format)
         image_bytes = buffered.getvalue()
 
